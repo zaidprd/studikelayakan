@@ -3,67 +3,305 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/sections/Footer.astro';
 import Header from '../components/sections/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
-import HeroSection from '../components/sections/HeroSection.astro';
+// MENGGUNAKAN KEMBALI KOMPONEN ASLI
+import HeroSection from '../components/sections/HeroSection.astro'; 
+import Button from '../components/ui/button/Button.astro';
+import ArrowSeparator from '../components/ui/separator/ArrowSeparator.astro';
+import GlowLineSeparator from '../components/ui/separator/GlowLineSeparator.astro';
+
+// Import yang diperlukan untuk Carousel
+import Carousel from '../components/ui/carousel/Carousel.astro';
+import { logos } from '../data/logos';
+
+// Import yang lain (tetap dipertahankan)
 import SkillsSection from '../components/sections/SkillsSection.astro';
 import { skills } from '../data/skills';
 import WorkExperience from '../components/sections/WorkExperience.astro';
 import { work } from '../data/work';
 import Studies from '../components/sections/Studies.astro';
 import { studies } from '../data/studies';
-import Carousel from '../components/ui/carousel/Carousel.astro';
-import { logos } from '../data/logos';
-import ArrowSeparator from '../components/ui/separator/ArrowSeparator.astro'
-import GlowLineSeparator from '../components/ui/separator/GlowLineSeparator.astro'
-
-// Logos
 import astroLogo from '../assets/logos/Astro-logo.svg';
 import googleAdsLogo from '../assets/logos/GoogleAds-logo.svg';
 import posthogLogo from '../assets/logos/posthog-logo.svg';
 import notionLogo from '../assets/logos/Notion-logo.svg';
 import figmaLogo from '../assets/logos/Figma-logo.svg';
 
-// skills are imported from src/data/skills
+// Pastikan SITE_TITLE dan SITE_DESCRIPTION didefinisikan jika tidak diimport dari consts
+const PAGE_TITLE = "Studi Kelayakan Bisnis — Jasa Konsultasi";
+const PAGE_DESCRIPTION = "Kami membantu Anda menilai kelayakan proyek bisnis melalui analisis menyeluruh: finansial, pasar, teknis, hingga hukum. Cocok untuk investor, developer, dan pengusaha yang ingin mengurangi risiko dan meningkatkan peluang sukses.";
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark" class="dark">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    <!-- JSON-LD: Organization -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'Organization',
-      name: 'Site Author',
-      url: new URL('/', Astro.site).toString(),
-      logo: new URL('/favicon.svg', Astro.site).toString(),
-      sameAs: [
-        'https://x.com/guihubie',
-        'https://www.linkedin.com/in/guilherme-hubie/',
-      ],
-    })} />
-	</head>
-	<body>
-		<Header />
-		<main>
-      <HeroSection
-        title="Your Headline Goes Here!"
-        subtitle="I build softwares that brings you loyal subscribers."
-        showCTA
-        primaryCTA={{ text: 'View Projects', href: '/portfolio' }}
-        secondaryCTA={{ text: 'Read Blog', href: '/blog' }}
-      />
-     
+<html lang="id" data-theme="dark" class="dark">
+  <head>
+    <BaseHead title={PAGE_TITLE} description={PAGE_DESCRIPTION} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "Jasa Studi Kelayakan Bisnis",
+      url: new URL('/', Astro.site).toString(),
+      logo: new URL('/favicon.svg', Astro.site).toString()
+    })} />
+  </head>
 
-    <section class="py-6">
-      <ArrowSeparator />
-      <SkillsSection title="Skills & Tools" skills={skills} />   
-      <ArrowSeparator />
-      <WorkExperience title="Work Experience" items={work} />
-      <ArrowSeparator />
-      <Studies title="Studies" items={studies} />
-      <GlowLineSeparator />
-    </section>
-		</main>
-		<Footer />
-	</body>
+  <body>
+    <Header />
+
+    <main>
+            <HeroSection
+        title="Jasa Studi Kelayakan Bisnis Profesional"
+        subtitle="Analisis menyeluruh untuk menilai kelayakan proyek: aspek pasar, teknis, hukum, keuangan, sosial, dan lingkungan — dilengkapi rekomendasi go / no-go."
+        showCTA
+        primaryCTA={{ text: 'Konsultasi Gratis', href: '#kontak' }}
+        secondaryCTA={{ text: 'Pelajari Selengkapnya', href: '#isi' }}
+      />
+
+            <section class="py-12 px-4 bg-gray-900/50">
+        <h2 class="text-lg font-semibold text-center text-gray-400 mb-6">Dipercaya oleh Investor & Developer</h2>
+        <Carousel tools={logos} /> 
+      </section>
+                  <section id="isi" class="py-16 px-4 max-w-6xl mx-auto space-y-10 text-[color:var(--color-text-secondary)]">
+        <ArrowSeparator />
+
+        <h2 class="text-3xl font-bold text-center text-white">Pengertian Studi Kelayakan Bisnis</h2>
+        <p class="text-lg leading-relaxed text-justify">
+          Studi kelayakan bisnis adalah kegiatan yang bertujuan untuk menentukan apakah suatu proyek bisnis atau usaha layak untuk dijalankan atau tidak.
+          Studi ini berfokus pada identifikasi potensi masalah kritis, solusi yang memungkinkan, analisis mendalam terhadap berbagai aspek bisnis, serta proyeksi risiko dan peluang.
+          Perlu dicatat bahwa studi kelayakan berbeda dengan rencana bisnis: studi kelayakan dilakukan <em>sebelum</em> menulis rencana bisnis untuk memastikan ide layak direalisasikan.
+        </p>
+
+        <ArrowSeparator />
+
+                <div class="grid md:grid-cols-2 gap-6">
+          <div class="p-6 bg-[color:var(--color-bg-secondary)] rounded-xl shadow-md">
+            <h3 class="text-xl font-semibold mb-4 text-[var(--accent)]">Tujuan Utama</h3>
+            <ul class="list-disc ml-5 space-y-2 text-gray-300">
+              <li>Memudahkan perencanaan bisnis melalui informasi tentang kelebihan dan kekurangan usaha.</li>
+              <li>Memperlancar pelaksanaan bisnis dengan menilai program dan kebijakan efektif.</li>
+              <li>Memperkecil risiko kerugian dengan mengidentifikasi risiko yang dapat dan tidak dapat dikendalikan.</li>
+              <li>Memudahkan proses pengawasan dan pengendalian internal serta eksternal.</li>
+            </ul>
+          </div>
+
+          <div class="p-6 bg-[color:var(--color-bg-secondary)] rounded-xl shadow-md">
+            <h3 class="text-xl font-semibold mb-4 text-[var(--accent)]">Manfaat</h3>
+            <ul class="list-disc ml-5 space-y-2 text-gray-300">
+              <li>Menilai kelayakan bisnis secara objektif.</li>
+              <li>Menganalisis potensi pasar dan daya saing produk.</li>
+              <li>Mengidentifikasi hambatan dan risiko bisnis.</li>
+              <li>Membantu pengambilan keputusan investasi dan meminimalkan risiko kegagalan.</li>
+            </ul>
+          </div>
+        </div>
+
+        <ArrowSeparator />
+
+                <h2 class="text-3xl font-bold text-center text-white">Aspek-aspek dalam Studi Kelayakan Bisnis</h2>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    <div class="p-6 bg-[color:var(--color-bg-secondary)] rounded-2xl shadow-md border border-[var(--border)]">
+            <div class="flex items-start gap-3 mb-3">
+              <span class="text-2xl">⚖️</span>
+              <h3 class="text-lg font-semibold">Aspek Hukum & Legalitas</h3>
+            </div>
+            <p class="text-gray-300 mb-2">
+              Menilai kesesuaian bisnis dengan ketentuan hukum yang berlaku dan kelengkapan dokumen.
+            </p>
+            <ul class="list-disc ml-6 text-sm text-gray-400 space-y-1">
+              <li>NPWP (Nomor Pokok Wajib Pajak)</li>
+              <li>Izin lokasi usaha</li>
+              <li>Surat Tanda Daftar Perusahaan (TDP/SKD)</li>
+              <li>Akta pendirian dari notaris</li>
+              <li>SIUP / izin usaha sesuai sektor</li>
+              <li>Izin khusus sesuai jenis usaha & compliance regulasi</li>
+            </ul>
+          </div>
+
+                    <div class="p-6 bg-[color:var(--color-bg-secondary)] rounded-2xl shadow-md border border-[var(--border)]">
+            <div class="flex items-start gap-3 mb-3">
+              <span class="text-2xl">📊</span>
+              <h3 class="text-lg font-semibold">Aspek Pasar & Pemasaran</h3>
+            </div>
+            <p class="text-gray-300 mb-2">Menganalisis peluang produk/jasa di pasar serta strategi pemasaran.</p>
+            <ul class="list-disc ml-6 text-sm text-gray-400 space-y-1">
+              <li>Potensi dan ukuran pasar</li>
+              <li>Jumlah dan karakteristik konsumen</li>
+              <li>Daya beli masyarakat dan segmentasi target</li>
+              <li>Analisis kompetitor dan tingkat persaingan</li>
+              <li>Strategi pemasaran, positioning, dan proyeksi penjualan</li>
+            </ul>
+          </div>
+
+                    <div class="p-6 bg-[color:var(--color-bg-secondary)] rounded-2xl shadow-md border border-[var(--border)]">
+            <div class="flex items-start gap-3 mb-3">
+              <span class="text-2xl">⚙️</span>
+              <h3 class="text-lg font-semibold">Aspek Teknis & Operasional</h3>
+            </div>
+            <p class="text-gray-300 mb-2">Evaluasi kemampuan teknis dan kesiapan operasional proyek.</p>
+            <ul class="list-disc ml-6 text-sm text-gray-400 space-y-1">
+              <li>Desain produk/jasa & pemilihan teknologi produksi</li>
+              <li>Kapasitas produksi optimal dan proses operasional</li>
+              <li>Ketersediaan bahan baku & rantai pasok</li>
+              <li>Layout fasilitas, infrastruktur, utilitas</li>
+              <li>Pengendalian kualitas dan maintenance</li>
+            </ul>
+          </div>
+
+                    <div class="p-6 bg-[color:var(--color-bg-secondary)] rounded-2xl shadow-md border border-[var(--border)]">
+            <div class="flex items-start gap-3 mb-3">
+              <span class="text-2xl">👥</span>
+              <h3 class="text-lg font-semibold">Aspek Manajemen & Organisasi</h3>
+            </div>
+            <p class="text-gray-300 mb-2">Mengkaji kemampuan manajerial dan struktur organisasi.</p>
+            <ul class="list-disc ml-6 text-sm text-gray-400 space-y-1">
+              <li>Struktur organisasi perusahaan</li>
+              <li>Sistem manajemen dan tata kelola</li>
+              <li>Fungsi manajemen (perencanaan, pengorganisasian, pengawasan)</li>
+              <li>Kepemimpinan, pengambilan keputusan, dan sistem informasi manajemen</li>
+            </ul>
+          </div>
+
+                    <div class="p-6 bg-[color:var(--color-bg-secondary)] rounded-2xl shadow-md border border-[var(--border)]">
+            <div class="flex items-start gap-3 mb-3">
+              <span class="text-2xl">🧑‍🏫</span>
+              <h3 class="text-lg font-semibold">Aspek Sumber Daya Manusia (SDM)</h3>
+              
+            </div>
+            <p class="text-gray-300 mb-2">Menilai kebutuhan dan kompetensi tenaga kerja.</p>
+            <ul class="list-disc ml-6 text-sm text-gray-400 space-y-1">
+              <li>Perencanaan kebutuhan tenaga kerja</li>
+              <li>Rekrutmen, seleksi, dan kualifikasi SDM</li>
+              <li>Sistem pelatihan dan pengembangan</li>
+              <li>Struktur gaji, kompensasi, dan evaluasi kinerja</li>
+            </ul>
+          </div>
+
+                    <div class="p-6 bg-[color:var(--color-bg-secondary)] rounded-2xl shadow-md border border-[var(--border)]">
+            <div class="flex items-start gap-3 mb-3">
+              <span class="text-2xl">💰</span>
+              <h3 class="text-lg font-semibold">Aspek Keuangan</h3>
+            </div>
+            <p class="text-gray-300 mb-2">Analisis kelayakan finansial dan skenario risiko.</p>
+            <ul class="list-disc ml-6 text-sm text-gray-400 space-y-1">
+              <li>Kebutuhan modal / investasi awal</li>
+              <li>Proyeksi arus kas (cash flow) dan laba rugi</li>
+              <li>Analisis BEP, NPV, IRR, ROI, payback period</li>
+              <li>Rasio keuangan, sumber pendanaan, dan analisis sensitivitas</li>
+            </ul>
+          </div>
+
+                    <div class="p-6 bg-[color:var(--color-bg-secondary)] rounded-2xl shadow-md border border-[var(--border)]">
+            <div class="flex items-start gap-3 mb-3">
+              <span class="text-2xl">🌍</span>
+              <h3 class="text-lg font-semibold">Aspek Ekonomi & Sosial</h3>
+            </div>
+            <p class="text-gray-300 mb-2">Evaluasi dampak ekonomi dan sosial terhadap daerah dan masyarakat.</p>
+            <ul class="list-disc ml-6 text-sm text-gray-400 space-y-1">
+              <li>Dampak terhadap perekonomian daerah</li>
+              <li>Penciptaan lapangan kerja dan kontribusi pendapatan daerah</li>
+              <li>Pengaruh terhadap budaya dan adat istiadat</li>
+              <li>Dampak sosial positif/negatif dan mitigasinya</li>
+            </ul>
+          </div>
+
+                    <div class="p-6 bg-[color:var(--color-bg-secondary)] rounded-2xl shadow-md border border-[var(--border)]">
+            <div class="flex items-start gap-3 mb-3">
+              <span class="text-2xl">🌱</span>
+              <h3 class="text-lg font-semibold">Aspek Lingkungan (AMDAL)</h3>
+            </div>
+            <p class="text-gray-300 mb-2">Analisis dampak lingkungan hidup dan upaya mitigasi.</p>
+            <ul class="list-disc ml-6 text-sm text-gray-400 space-y-1">
+              <li>Dampak fisik, kimia, dan biologis terhadap lingkungan</li>
+              <li>Dampak sosial-budaya dan kesehatan masyarakat</li>
+              <li>Rencana mitigasi dan pengendalian dampak</li>
+              <li>Aspek sustainability & keberlanjutan</li>
+            </ul>
+          </div>
+        </div>
+
+        <ArrowSeparator />
+
+                <h2 class="text-3xl font-bold text-center text-white">Tahapan Pelaksanaan Studi Kelayakan Bisnis</h2>
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="p-6 bg-[color:var(--color-bg-secondary)] rounded-xl shadow-md">
+            <h3 class="font-semibold text-lg mb-3">1. Penemuan dan Identifikasi Ide</h3>
+            <p class="text-gray-300">Identifikasi peluang bisnis, masalah yang akan diselesaikan, dan ide solusi melalui brainstorming serta pemetaan awal.</p>
+          </div>
+
+          <div class="p-6 bg-[color:var(--color-bg-secondary)] rounded-xl shadow-md">
+            <h3 class="font-semibold text-lg mb-3">2. Penelitian Awal (Preliminary Study)</h3>
+            <p class="text-gray-300">Pengumpulan data primer dan sekunder, analisis faktor kunci, identifikasi hambatan potensial, serta penentuan kelayakan awal.</p>
+          </div>
+
+          <div class="p-6 bg-[color:var(--color-bg-secondary)] rounded-xl shadow-md">
+            <h3 class="font-semibold text-lg mb-3">3. Studi Mendalam</h3>
+            <p class="text-gray-300">Analisis detail untuk setiap aspek: pasar, teknis, finansial, hukum, sosial, dan lingkungan. Perhitungan proyeksi keuangan dan model bisnis.</p>
+          </div>
+
+          <div class="p-6 bg-[color:var(--color-bg-secondary)] rounded-xl shadow-md">
+            <h3 class="font-semibold text-lg mb-3">4. Evaluasi dan Penilaian</h3>
+            <p class="text-gray-300">Penilaian hasil analisis masing-masing aspek, identifikasi kekuatan, kelemahan, peluang, serta risiko proyek.</p>
+          </div>
+
+          <div class="p-6 bg-[color:var(--color-bg-secondary)] rounded-xl shadow-md">
+            <h3 class="font-semibold text-lg mb-3">5. Pengambilan Keputusan</h3>
+            <p class="text-gray-300">Kesimpulan kelayakan: rekomendasi go / no-go, alternatif perbaikan, dan penyusunan laporan akhir untuk pemangku kepentingan.</p>
+          </div>
+
+          <div class="p-6 bg-[color:var(--color-bg-secondary)] rounded-xl shadow-md">
+            <h3 class="font-semibold text-lg mb-3">6. Implementasi (Jika Layak)</h3>
+            <p class="text-gray-300">Penyusunan rencana bisnis detail, rencana implementasi proyek, monitoring dan evaluasi berkala selama fase konstruksi & operasional.</p>
+          </div>
+        </div>
+
+        <ArrowSeparator />
+
+                <h2 class="text-3xl font-bold text-center text-white">Kriteria Penilaian Kelayakan</h2>
+        <p class="text-gray-300 max-w-3xl mx-auto text-center mb-6">
+          Suatu bisnis dinyatakan <strong>LAYAK</strong> jika memenuhi kriteria berikut:
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div class="p-6 bg-[color:var(--color-bg-secondary)] rounded-xl shadow-md">
+            <ul class="list-disc ml-5 space-y-2 text-gray-300">
+              <li>Aspek Hukum: Memiliki legalitas lengkap (NPWP, akta, izin usaha, dll).</li>
+              <li>Aspek Pasar: Terdapat demand yang cukup dan positioning produk jelas.</li>
+              <li>Aspek Teknis: Teknologi & sumber daya teknis tersedia dan feasible.</li>
+              <li>Aspek Manajemen: Struktur organisasi dan manajemen memadai.</li>
+            </ul>
+          </div>
+
+          <div class="p-6 bg-[color:var(--color-bg-secondary)] rounded-xl shadow-md">
+            <ul class="list-disc ml-5 space-y-2 text-gray-300">
+              <li>Aspek SDM: Tenaga kerja kompeten dan sistem pengembangan SDM ada.</li>
+              <li>Aspek Keuangan: NPV positif, IRR > cost of capital, rasio sehat.</li>
+              <li>Aspek Sosial & Ekonomi: Memberikan dampak positif bagi masyarakat.</li>
+              <li>Aspek Lingkungan: Tidak merusak lingkungan dan ada program mitigasi.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="text-center mt-10">
+          <Button href="#kontak" variant="primary" size="lg" class="!text-white">Konsultasi Gratis Sekarang</Button>
+        </div>
+
+        <GlowLineSeparator />
+      </section>
+
+            <section id="kontak" class="py-16 bg-gradient-to-r from-[#0b0f15] to-[#0f1720] text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">Siap Evaluasi Proyek Anda?</h2>
+        <p class="text-gray-300 mb-6 max-w-3xl mx-auto">
+          Kirim detail singkat proyek Anda, atau jadwalkan konsultasi gratis. Tim kami akan melakukan screening awal dan memberi rekomendasi langkah selanjutnya.
+        </p>
+        <div class="flex items-center justify-center gap-4">
+          <Button href="/kontak" variant="primary" size="lg" class="!text-white">Konsultasi Gratis</Button>
+          <Button href="/layanan" variant="secondary" size="md">Lihat Layanan Lengkap</Button>
+        </div>
+      </section>
+
+      <GlowLineSeparator />
+    </main>
+
+    <Footer />
+  </body>
 </html>
